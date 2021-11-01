@@ -1,5 +1,5 @@
-import cadastro from "./pessoa";
+import cadastro from "./routes";
 
 export default {
-	cadastro,
+  cadastro,
 };
