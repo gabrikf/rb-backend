@@ -88,18 +88,22 @@ router.post(
       const pessoaModel = await usuario.createUser(email, senha);
       res.send(pessoaModel);
     } catch (error) {
-      res.status(409).json({ error: error.message });
+      res.status(403).send({ error: error.message });
     }
   })
 );
 router.post(
   `/login`,
   chain(async (req, res, next) => {
-    const { email, senha } = req.body;
+    try {
+      const { email, senha } = req.body;
 
-    const pessoaModel = await usuario.login(email, senha);
+      const pessoaModel = await usuario.login(email, senha);
 
-    res.send(pessoaModel);
+      res.send(pessoaModel);
+    } catch (error) {
+      res.status(403).send({ error: error.message });
+    }
   })
 );
 

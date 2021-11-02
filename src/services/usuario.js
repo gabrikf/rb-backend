@@ -10,7 +10,7 @@ export const createUser = async (email, senha) => {
   const hashPasswd = bcrypt.hashSync(senha, salt);
   const exists = await db.findByEmail(ENTITY_NAME, email);
   if (exists) {
-    throw new Error("esse email ja está em uso. Use outro, por favor...");
+    throw new Error("Email já está em uso.");
   }
   const newUser = await db.create(ENTITY_NAME, { email, senha: hashPasswd });
   const token = sign(
@@ -33,6 +33,9 @@ export const login = async (emailDigitado, senhaDigitada) => {
       ENTITY_NAME,
       emailDigitado
     );
+    if (!email) {
+      throw new Error("Dados não conferem.");
+    }
     if (bcrypt.compareSync(senhaDigitada, senha)) {
       const token = sign(
         {
@@ -48,11 +51,7 @@ export const login = async (emailDigitado, senhaDigitada) => {
         email,
       };
     }
-    throw new error();
-  } catch (e) {
-    return {
-      error: { messege: "wrong credentials." },
-      success: false,
-    };
+  } catch (error) {
+    throw new Error("Dados não conferem.");
   }
 };

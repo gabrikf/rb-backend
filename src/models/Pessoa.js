@@ -14,8 +14,12 @@ module.exports = (sequelize, DataTypes) => {
         field: "nm_pessoa",
       },
       dataNascimento: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         filed: "dt_pessoa",
+      },
+      idade: {
+        type: DataTypes.INTEGER,
+        filed: "idd_pessoa",
       },
       cep: {
         type: DataTypes.STRING(8),
