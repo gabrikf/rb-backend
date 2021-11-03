@@ -31,6 +31,7 @@ export const findAllPaginated = async (
   const results = await models[entity].findAll({
     limit: itensPerPage,
     offset: offset,
+    order: [["idade", "DESC"]],
   });
 
   return {
@@ -54,6 +55,7 @@ export const findAllPaginatedByUser = async (
     where: { id_usuario },
     limit: itensPerPage,
     offset: offset,
+    order: [["idade", "DESC"]],
   });
 
   return {

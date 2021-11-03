@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         field: "nm_pessoa",
       },
       dataNascimento: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.STRING(10),
         filed: "dt_pessoa",
       },
       idade: {
